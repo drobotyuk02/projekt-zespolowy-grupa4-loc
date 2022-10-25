@@ -1,2 +1,0 @@
-Na diagramie klas zmieniono nazwę klient na użytkownik i dodano atrybut określający czy jest on adminem.
-Diagram DDL oczekuje na aktualizację.
