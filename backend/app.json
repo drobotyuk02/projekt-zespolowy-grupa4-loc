@@ -1,0 +1,5 @@
+{
+  "name": "Library: backend",
+  "description": "A backend app for our library project",
+  "addons": [ "heroku-postgresql" ]
+}
