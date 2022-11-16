@@ -8,7 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-//import logo from 'logo-bookly.jpg';
+
 
 function ProductCard(props) { // props.product is the product we are selling
     const product = props.product;
@@ -20,9 +20,9 @@ function ProductCard(props) { // props.product is the product we are selling
         <Card sx={{ maxWidth: 345 }}>
         <CardActionArea>
           <CardMedia
-            component="img"
+            component="img" 
             height="240"
-            image="./logo-bookly.png"
+            image="logo-bookly.png"
             alt="green iguana"
           />
           <CardContent>
