@@ -34,11 +34,13 @@ function NavbarComponent() {
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <Button onClick={handleShow}>Cart ({productsCount} Items)</Button>
+                    <a href = "http://localhost:3000/registration">Sign In/Up</a>
                 </Navbar.Collapse>
             </Navbar>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Shopping Cart</Modal.Title>
+                    <Modal.Title>Sign In/Up</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {productsCount > 0 ?

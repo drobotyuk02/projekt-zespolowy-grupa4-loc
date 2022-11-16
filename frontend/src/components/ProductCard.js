@@ -1,8 +1,14 @@
-
-import { Card, Button, Form, Row, Col } from 'react-bootstrap';
+//import '../CardStyles.css'
+//import {Card, Col, Row, Form, Button} from 'react-bootstrap'
 import { CartContext } from '../CartContext';
 import { useContext } from 'react';
-import logo from '../logo.svg';
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
+//import logo from 'logo-bookly.jpg';
 
 function ProductCard(props) { // props.product is the product we are selling
     const product = props.product;
@@ -10,29 +16,27 @@ function ProductCard(props) { // props.product is the product we are selling
     const productQuantity = cart.getProductQuantity(product.id);
     console.log(cart.items);
     return (
-        <Card>
-            <Card.Body>
-                <Card.Img src={logo} />
-                <Card.Title>{product.title}</Card.Title>
-                <Card.Text>Buy  /  Borrow</Card.Text>
-                <Card.Text>${product.price} / ${product.borrowprice}</Card.Text>
-                { productQuantity > 0 ?
-                    <>
-                        <Form as={Row}>
-                            <Form.Label column="true" sm="6">In Cart: {productQuantity}</Form.Label>
-                            <Col sm="6">
-                                <Button sm="6" onClick={() => cart.addOneToCart(product.id)} className="mx-2">+</Button>
-                                <Button sm="6" onClick={() => cart.removeOneFromCart(product.id)} className="mx-2">-</Button>
-                            </Col>
-                        </Form>
-                        <Button variant="danger" onClick={() => cart.deleteFromCart(product.id)} className="my-2">Remove from cart</Button>
-                    </>
-                    :
-                    <Button variant="primary" onClick={() => cart.addOneToCart(product.id)}>Add To Cart</Button>
-                }
-            </Card.Body>
-        </Card>
-    )
+
+        <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="240"
+            image="./logo-bookly.png"
+            alt="green iguana"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              Lizard
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Lizards are a widespread group of squamate reptiles, with over 6,000
+              species, ranging across all continents except Antarctica
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    );
 }
 
 export default ProductCard;
