@@ -1,17 +1,18 @@
 package org.library.backend.controllers;
 
+import org.library.backend.dto.BasicPersonLoginDTO;
+import org.library.backend.dto.PersonDTO;
 import org.library.backend.models.Person;
 import org.library.backend.services.RegistrationService;
 import org.library.backend.util.validator.PersonValidator;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/auth")
@@ -19,11 +20,13 @@ public class AuthController {
 
     private final RegistrationService registrationService;
     private final PersonValidator personValidator;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public AuthController(RegistrationService registrationService, PersonValidator personValidator) {
+    public AuthController(RegistrationService registrationService, PersonValidator personValidator, ModelMapper modelMapper) {
         this.registrationService = registrationService;
         this.personValidator = personValidator;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping("/login")
@@ -50,4 +53,19 @@ public class AuthController {
 
         return "redirect:/auth/login";
     }
+
+    @PostMapping("/login")
+    public Map<String, String> performLogin(@RequestBody BasicPersonLoginDTO authDTO) {
+        // TODO
+        return null;
+    }
+
+    public Person convertToPerson(PersonDTO personDTO) {
+        return this.modelMapper.map(personDTO, Person.class);
+    }
+
+    public PersonDTO convertToDTO(Person person) {
+        return this.modelMapper.map(person, PersonDTO.class);
+    }
+
 }

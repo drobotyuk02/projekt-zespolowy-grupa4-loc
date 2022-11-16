@@ -7,6 +7,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
+import java.time.Instant;
+
 @Service
 public class RegistrationService {
 
@@ -23,6 +26,7 @@ public class RegistrationService {
     public void register(Person person) {
         person.setPassword(passwordEncoder.encode(person.getPassword()));
         person.setRole("ROLE_USER");
+        person.setCreatedAt(new Date(System.currentTimeMillis()));
         personRepository.save(person);
     }
 }
