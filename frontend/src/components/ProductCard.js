@@ -1,6 +1,6 @@
 //import '../CardStyles.css'
-//import {Card, Col, Row, Form, Button} from 'react-bootstrap'
-import { CartContext } from '../CartContext';
+import {Col, Row, Form, Button} from 'react-bootstrap'
+import { CartContext, cartProduct } from '../CartContext';
 import { useContext } from 'react';
 import * as React from 'react';
 import Card from '@mui/material/Card';
@@ -23,16 +23,24 @@ function ProductCard(props) { // props.product is the product we are selling
             component="img" 
             height="240"
             image="logo-bookly.png"
-            alt="green iguana"
+            //alt = {{product.id}}
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              Lizard
+            {product.title}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group of squamate reptiles, with over 6,000
-              species, ranging across all continents except Antarctica
+            ${product.price} / ${product.borrowprice}               
             </Typography>
+            { productQuantity > 0 ?
+                    <>
+                        <Button sm="6" onClick={() => cart.addOneToCart(product.id)} className="mx-2">+</Button>
+                        <Button sm="6" onClick={() => cart.removeOneFromCart(product.id)} className="mx-2">-</Button>
+                        <Button variant="danger" onClick={() => cart.deleteFromCart(product.id)} className="my-2">Remove from cart</Button>
+                    </>
+                    :
+                    <Button variant="primary" onClick={() => cart.addOneToCart(product.id)}>Add To Cart</Button>
+                }
           </CardContent>
         </CardActionArea>
       </Card>

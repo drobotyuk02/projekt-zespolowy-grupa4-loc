@@ -12,7 +12,6 @@ import Grid from '@mui/material/Grid';
 //import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-//import logo from './logo.svg';
 
 const theme = createTheme();
 
@@ -38,7 +37,7 @@ function Login() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(./logo.svg)',
+            backgroundImage: 'Image-login.jpg',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
             t.palette.mode === 'light' ? t.palette.grey[100] : t.palette.white[900],
