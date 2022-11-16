@@ -25,9 +25,28 @@ function Registration() {
       username: data.get('username'),
       email: data.get('email'),
       password: data.get('password'),
+      repeatedPassword: data.get('repeatedPassword'),
+      name: data.get('firstName'),
+      surname: data.get('lastName'),
     };
     console.log(JSON.stringify(datta));
-  };
+
+    (async () => {
+      const rawResponse = await fetch("http://127.0.0.1:8082/auth/registration", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(datta)
+    })
+
+    const content = await rawResponse.json();
+
+   console.log(content);
+  })();
+}
+
 
   return (
     <ThemeProvider theme={theme}>
