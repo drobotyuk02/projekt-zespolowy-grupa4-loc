@@ -2,6 +2,9 @@ package org.library.backend.models;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.Instant;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 public class Person {
@@ -36,6 +39,50 @@ public class Person {
     @Id
     @Column(name = "PersonID", nullable = false)
     private int personId;
+
+    @Column(name = "Subscribed_at")
+    private Instant subscribedAt;
+
+    @Column(name = "Subscription_type")
+    private Integer subscriptionType;
+
+    @OneToMany(mappedBy = "personID")
+    private Set<Order> orders = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "personID")
+    private Set<PersonAddress> personAddresses = new LinkedHashSet<>();
+
+    public Set<PersonAddress> getPersonAddresses() {
+        return personAddresses;
+    }
+
+    public void setPersonAddresses(Set<PersonAddress> personAddresses) {
+        this.personAddresses = personAddresses;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Integer getSubscriptionType() {
+        return subscriptionType;
+    }
+
+    public void setSubscriptionType(Integer subscriptionType) {
+        this.subscriptionType = subscriptionType;
+    }
+
+    public Instant getSubscribedAt() {
+        return subscribedAt;
+    }
+
+    public void setSubscribedAt(Instant subscribedAt) {
+        this.subscribedAt = subscribedAt;
+    }
 
     public Date getCreatedAt() {
         return createdAt;

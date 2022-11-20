@@ -13,6 +13,18 @@ public class PersonAddress {
     @Column(name = "PersonID", nullable = false)
     private int personId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PersonID")
+    private Person personID;
+
+    public Person getPersonID() {
+        return personID;
+    }
+
+    public void setPersonID(Person personID) {
+        this.personID = personID;
+    }
+
     public int getPersonAddressId() {
         return personAddressId;
     }

@@ -2,6 +2,7 @@ package org.library.backend.controllers;
 
 import org.library.backend.dto.BasicPersonLoginDTO;
 import org.library.backend.dto.PersonDTO;
+import org.library.backend.dto.PersonRegistrationDTO;
 import org.library.backend.models.Person;
 import org.library.backend.services.RegistrationService;
 import org.library.backend.util.validator.PersonValidator;
@@ -34,13 +35,25 @@ public class AuthController {
         return "login";
     }
 
-    @GetMapping("/registration")
+    @PostMapping("/registration")
+    @ResponseBody
     ////Not model attribute, but RequestBody with DTO?
-    public String registrationPage(@ModelAttribute("person") Person person) {
-        return "register";
+    //public String registrationPage(@ModelAttribute("person") Person person) {
+    public PersonRegistrationDTO register(@RequestBody PersonRegistrationDTO regDTO,
+                                          BindingResult bindingResult) {
+        Person person = convertToPerson(regDTO);
+
+        personValidator.validate(person, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return regDTO;
+        }
+
+        registrationService.register(person);
+        return regDTO;
     }
 
-    @PostMapping("/registration")
+    @GetMapping("/registrationPage")
     //Not model attribute, but RequestBody with DTO?
     public String performRegistration(@ModelAttribute("person") @Valid Person person,
                                       BindingResult bindingResult) {
@@ -60,7 +73,7 @@ public class AuthController {
         return null;
     }
 
-    public Person convertToPerson(PersonDTO personDTO) {
+    public Person convertToPerson(PersonRegistrationDTO personDTO) {
         return this.modelMapper.map(personDTO, Person.class);
     }
 

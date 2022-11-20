@@ -28,6 +28,18 @@ public class Order {
     @Column(name = "PersonID", nullable = true)
     private Integer personId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PersonID")
+    private Person personID;
+
+    public Person getPersonID() {
+        return personID;
+    }
+
+    public void setPersonID(Person personID) {
+        this.personID = personID;
+    }
+
     public Date getDateDueTo() {
         return dateDueTo;
     }

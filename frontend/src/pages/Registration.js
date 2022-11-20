@@ -36,7 +36,8 @@ function Registration() {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       },
       body: JSON.stringify(datta)
     })
@@ -129,10 +130,10 @@ function Registration() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControlLabel
+                {/* <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
                   label="I want to receive inspiration, marketing promotions and updates via email."
-                />
+                /> */}
               </Grid>
             </Grid>
             <Button
