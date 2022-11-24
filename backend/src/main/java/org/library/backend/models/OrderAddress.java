@@ -1,5 +1,7 @@
 package org.library.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,9 +11,19 @@ public class OrderAddress {
     @Id
     @Column(name = "Order_addressID", nullable = false)
     private int orderAddressId;
-    @Basic
-    @Column(name = "OrderID", nullable = false)
-    private int orderId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "OrderID")
+    @JsonBackReference
+    private Order orderID;
+
+    public Order getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(Order orderID) {
+        this.orderID = orderID;
+    }
 
     public int getOrderAddressId() {
         return orderAddressId;
@@ -21,13 +33,6 @@ public class OrderAddress {
         this.orderAddressId = orderAddressId;
     }
 
-    public int getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -37,7 +42,6 @@ public class OrderAddress {
         OrderAddress that = (OrderAddress) o;
 
         if (orderAddressId != that.orderAddressId) return false;
-        if (orderId != that.orderId) return false;
 
         return true;
     }
@@ -45,7 +49,7 @@ public class OrderAddress {
     @Override
     public int hashCode() {
         int result = orderAddressId;
-        result = 31 * result + orderId;
+        result = 31 * result;
         return result;
     }
 }

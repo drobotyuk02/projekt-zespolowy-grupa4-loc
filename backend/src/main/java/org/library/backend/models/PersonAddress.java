@@ -1,5 +1,7 @@
 package org.library.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,12 +11,10 @@ public class PersonAddress {
     @Id
     @Column(name = "Person_addressID", nullable = false)
     private int personAddressId;
-    @Basic
-    @Column(name = "PersonID", nullable = false)
-    private int personId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PersonID")
+    @JsonBackReference
     private Person personID;
 
     public Person getPersonID() {
@@ -33,13 +33,6 @@ public class PersonAddress {
         this.personAddressId = personAddressId;
     }
 
-    public int getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(int personId) {
-        this.personId = personId;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -49,7 +42,6 @@ public class PersonAddress {
         PersonAddress that = (PersonAddress) o;
 
         if (personAddressId != that.personAddressId) return false;
-        if (personId != that.personId) return false;
 
         return true;
     }
@@ -57,7 +49,7 @@ public class PersonAddress {
     @Override
     public int hashCode() {
         int result = personAddressId;
-        result = 31 * result + personId;
+        result = 31 * result;
         return result;
     }
 }

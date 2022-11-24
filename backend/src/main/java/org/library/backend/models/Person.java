@@ -1,5 +1,7 @@
 package org.library.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.time.Instant;
@@ -47,10 +49,13 @@ public class Person {
     private Integer subscriptionType;
 
     @OneToMany(mappedBy = "personID")
-    private Set<Order> orders = new LinkedHashSet<>();
+    @JsonManagedReference
+    private Set<PersonAddress> personAddresses = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "personID")
-    private Set<PersonAddress> personAddresses = new LinkedHashSet<>();
+    @JsonManagedReference
+    private Set<Order> orders = new LinkedHashSet<>();
+
 
     public Set<PersonAddress> getPersonAddresses() {
         return personAddresses;

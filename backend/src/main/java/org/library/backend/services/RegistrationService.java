@@ -24,9 +24,17 @@ public class RegistrationService {
 
     @Transactional
     public void register(Person person) {
+        if(isEmailPresent(person.getEmail())){
+            throw new RuntimeException("User with provided email already exists");
+        }
+
         person.setPassword(passwordEncoder.encode(person.getPassword()));
         person.setRole("ROLE_USER");
         person.setCreatedAt(new Date(System.currentTimeMillis()));
         personRepository.save(person);
+    }
+
+    private boolean isEmailPresent(String email) {
+        return personRepository.findByEmail(email).isPresent();
     }
 }
