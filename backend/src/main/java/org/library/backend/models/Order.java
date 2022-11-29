@@ -1,7 +1,13 @@
 package org.library.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Order {
@@ -24,12 +30,17 @@ public class Order {
     @Id
     @Column(name = "OrderID", nullable = false)
     private int orderId;
-    @Basic
-    @Column(name = "PersonID", nullable = true)
-    private Integer personId;
+
+    @OneToMany(mappedBy = "orderID")
+    private Set<Product> products = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "orderID")
+    @JsonManagedReference
+    private Set<OrderAddress> orderAddresses = new LinkedHashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PersonID")
+    @JsonBackReference
     private Person personID;
 
     public Person getPersonID() {
@@ -38,6 +49,22 @@ public class Order {
 
     public void setPersonID(Person personID) {
         this.personID = personID;
+    }
+
+    public Set<OrderAddress> getOrderAddresses() {
+        return orderAddresses;
+    }
+
+    public void setOrderAddresses(Set<OrderAddress> orderAddresses) {
+        this.orderAddresses = orderAddresses;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 
     public Date getDateDueTo() {
@@ -88,41 +115,23 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public Integer getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(Integer personId) {
-        this.personId = personId;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Order order = (Order) o;
 
-        if (orderId != order.orderId) return false;
-        if (dateDueTo != null ? !dateDueTo.equals(order.dateDueTo) : order.dateDueTo != null) return false;
-        if (dateRentFrom != null ? !dateRentFrom.equals(order.dateRentFrom) : order.dateRentFrom != null) return false;
-        if (description != null ? !description.equals(order.description) : order.description != null) return false;
-        if (orderDate != null ? !orderDate.equals(order.orderDate) : order.orderDate != null) return false;
-        if (quantity != null ? !quantity.equals(order.quantity) : order.quantity != null) return false;
-        if (personId != null ? !personId.equals(order.personId) : order.personId != null) return false;
-
+        if (orderId == order.orderId) if (Objects.equals(dateDueTo, order.dateDueTo))
+        if (Objects.equals(dateRentFrom, order.dateRentFrom)) if (Objects.equals(description, order.description))
+        if (Objects.equals(orderDate, order.orderDate)) if (Objects.equals(quantity, order.quantity))
         return true;
+
+        return false;
     }
 
     @Override
     public int hashCode() {
-        int result = dateDueTo != null ? dateDueTo.hashCode() : 0;
-        result = 31 * result + (dateRentFrom != null ? dateRentFrom.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (orderDate != null ? orderDate.hashCode() : 0);
-        result = 31 * result + (quantity != null ? quantity.hashCode() : 0);
-        result = 31 * result + orderId;
-        result = 31 * result + (personId != null ? personId.hashCode() : 0);
-        return result;
+        return Objects.hash(dateDueTo, dateRentFrom, description, orderDate, quantity, orderId);
     }
 }

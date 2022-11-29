@@ -39,7 +39,7 @@ public class AuthController {
     @ResponseBody
     ////Not model attribute, but RequestBody with DTO?
     //public String registrationPage(@ModelAttribute("person") Person person) {
-    public PersonRegistrationDTO register(@RequestBody PersonRegistrationDTO regDTO,
+    public PersonRegistrationDTO register(@RequestBody @Valid PersonRegistrationDTO regDTO,
                                           BindingResult bindingResult) {
         Person person = convertToPerson(regDTO);
 

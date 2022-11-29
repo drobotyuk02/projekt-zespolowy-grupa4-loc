@@ -28,9 +28,18 @@ public class Product {
     @Basic
     @Column(name = "AuthorID", nullable = true)
     private Integer authorId;
-    @Basic
-    @Column(name = "OrderID", nullable = true)
-    private Integer orderId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "OrderID")
+    private Order orderID;
+
+    public Order getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(Order orderID) {
+        this.orderID = orderID;
+    }
 
     public BigDecimal getBuyPrice() {
         return buyPrice;
@@ -88,13 +97,6 @@ public class Product {
         this.authorId = authorId;
     }
 
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -110,7 +112,6 @@ public class Product {
         if (rentPrice != null ? !rentPrice.equals(product.rentPrice) : product.rentPrice != null) return false;
         if (title != null ? !title.equals(product.title) : product.title != null) return false;
         if (authorId != null ? !authorId.equals(product.authorId) : product.authorId != null) return false;
-        if (orderId != null ? !orderId.equals(product.orderId) : product.orderId != null) return false;
 
         return true;
     }
@@ -124,7 +125,6 @@ public class Product {
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + productId;
         result = 31 * result + (authorId != null ? authorId.hashCode() : 0);
-        result = 31 * result + (orderId != null ? orderId.hashCode() : 0);
         return result;
     }
 }
