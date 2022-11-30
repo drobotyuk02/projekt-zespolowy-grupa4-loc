@@ -3,7 +3,7 @@ import { useState, useContext } from 'react';
 import TextField from "@mui/material/TextField";
 import { CartContext } from "../CartContext";
 import CartProduct from './CartProduct';
-import logo from '../logo-bookly.jpg';
+import logo from '../logo_bookly_v2.png';
 
 function NavbarComponent() {
     const cart = useContext(CartContext);
@@ -37,7 +37,7 @@ function NavbarComponent() {
     const productsCount = cart.items.reduce((sum, product) => sum + product.quantity, 0);
     return (
         <>
-            <Navbar expand="sm">
+            <Navbar  expand="sm">
                 <a href="#">
                     <img width= "50%" auto src={logo} alt="logoBrand"/>
                     {/* <img max-width= "50%" height="auto" auto src={logo} alt="logoBrand"/> */}

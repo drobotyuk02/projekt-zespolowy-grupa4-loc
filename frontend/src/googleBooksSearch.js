@@ -66,12 +66,13 @@ function GoogleBooksSearch() {
      }
 
     return ( 
-        <form onSubmit={handleSubmit}>  
-            <Center>
+        <form style ={{'borderRadius':'15px','background': 'linear-gradient(120.08deg, #005AA7 0.53%, #FFFDE4 100%)'}} onSubmit={handleSubmit}>  
+            <Center >
                 <div className=" card-header main-search">  
                     <div className="col-12 col-md-3 col-xl-3" > 
-                        <div style = {{'margin-bottom': '45px'}}>
-                        <input onChange={handleChange} 
+                        <div style = {{'marginBottom': '45px'}}>
+                        <input style={{'marginTop':'25px'}}
+                                onChange={handleChange} 
                                 className="AutoFocus"
                                 placeholder="Type here..."
                                 type="text" 
@@ -85,7 +86,7 @@ function GoogleBooksSearch() {
                 <Row xs={1} md={4} className="g-4" >
                     {result.map(book => (  
                         <Col >
-                            <Card href = {book.volumeInfo.canonicalVolumeLink} style={{ 'marginTop': '10px', 'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}} p="md" radius="md" component="a" className={classes.card}>  
+                            <Card href = {book.volumeInfo.canonicalVolumeLink} style={{ 'marginTop': '10px', 'boxShadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}} p="md" radius="md" component="a" className={classes.card}>  
                                 <AspectRatio ratio={1920 / 1080}>
                                     <Image src={book.volumeInfo.imageLinks !== undefined ? book.volumeInfo.imageLinks.thumbnail : ''} alt={book.title}/>
                                 </AspectRatio>
