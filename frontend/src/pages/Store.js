@@ -33,8 +33,8 @@ function Store(){
   
     return(
         <>
-        <NavbarComponent></NavbarComponent>
-        <GoogleBooksSearch></GoogleBooksSearch>
+            <NavbarComponent></NavbarComponent>
+            <GoogleBooksSearch></GoogleBooksSearch>
 
         </>
     ) 

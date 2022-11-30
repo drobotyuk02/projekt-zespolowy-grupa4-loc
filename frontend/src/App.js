@@ -10,7 +10,7 @@ import Registration from "./pages/Registration";
  import CartProvider from './CartContext';
  import { Container } from "react-bootstrap";
  import { Link } from 'react-router-dom';
-// import "react-pro-sidebar/dist/css/styles.css";
+ // import "react-pro-sidebar/dist/css/styles.css";
 //import "./CardStyles.css";
 // localhost:3000 -> Home
 // localhost:3000/success -> Success

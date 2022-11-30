@@ -1,9 +1,10 @@
-import React, { useState } from "react";  
+import React, { useState, useEffect } from "react";  
 import axios from 'axios';  
-//import { Card } from 'react-bootstrap';  
+import { Col, Row } from 'react-bootstrap';  
 import NavbarComponent from './components/Navbar';
-import { createStyles, SimpleGrid, Card, Image, Text, Container, AspectRatio } from '@mantine/core';
+import { createStyles, SimpleGrid, Card, Image, Text, Container, AspectRatio, Center } from '@mantine/core';
 import './App.css';
+import { priceData } from "./data/prices";
 
 const useStyles = createStyles((theme) => ({
     card: {
@@ -25,12 +26,11 @@ function GoogleBooksSearch() {
     const { classes } = useStyles();
     const [book, setBook] = useState("");  
     const [result, setResult] = useState([]);  
-    const [apiKey, setApiKey] = useState("AIzaSyDtzZSStIm_x5mFwzUpj2kR2vd47O6550A");
-  
-    function handleChange(event) {  
-        const book = event.target.value;  
-        setBook(book);  
-    }  
+
+    // const product = props.product;
+    // const cart = useContext(CartContext);
+    // const productQuantity = cart.getProductQuantity(book.id);
+    //const [apiKey, setApiKey] = useState("AIzaSyDtzZSStIm_x5mFwzUpj2kR2vd47O6550A");
 
     function handleSubmit(event) {  
         event.preventDefault();  
@@ -40,47 +40,68 @@ function GoogleBooksSearch() {
                 console.log(data.data.items);  
                 setResult(data.data.items);  
             })  
+    } 
+
+    function handleChange(event) {  
+        const book = event.target.value;  
+        setBook(book);  
     }  
-{/* <Card.Img style = {{maxHeight:"200px"}} variant="top" src={}  />  
-                                <Card.Body>  
-                                    <h5 className="card-title">Card title</h5>  
-                                    <a href = {book.volumeInfo.canonicalVolumeLink}className="btn btn-primary">Know more</a>  
-                                </Card.Body>   
-                            <Card key={article.title} style={{ 'marginTop': '10px'}} p="md" radius="md" component="a" className={classes.card}>  */}
+
+    function truncate(str, n){
+        return (str.length > n) ? str.slice(0, n-1) + '...' : str;
+    };
+
+    function authorCheck(str){
+        if (str === undefined) {
+            return 'We found no author of this book 😔 '
+         }
+        //str = truncate(str,30)
+        const a = truncate(str,30);
+        return a
+    };  
+     function rando(){
+        var a = Math.floor(Math.random() * 12);
+        console.log(a);
+        return a;
+     }
+
     return ( 
-        <form onSubmit={handleSubmit}>    
-            <NavbarComponent></NavbarComponent>
-            <div className="card-header main-search">  
-                <div className="row" >  
-                    <div className="col-12 col-md-3 col-xl-3" >  
-                        <input onChange={handleChange} className="AutoFocus form-control" placeholder="Type something..." type="text" />  
+        <form onSubmit={handleSubmit}>  
+            <Center>
+                <div className=" card-header main-search">  
+                    <div className="col-12 col-md-3 col-xl-3" > 
+                        <div style = {{'margin-bottom': '45px'}}>
+                        <input onChange={handleChange} 
+                                className="AutoFocus"
+                                placeholder="Type here..."
+                                type="text" 
+                            />  
+                        
+                        </div>
                     </div>  
-                    <div className="ml-auto">  
-                        <input type="submit" value="Search" className="btn btn-primary search-btn" />  
-                    </div>  
-                </div>  
-            </div>
+                </div>
+            </Center>
             <div className="container">  
-                <div className="row">  
+                <Row xs={1} md={4} className="g-4" >
                     {result.map(book => (  
-                        <div className="col-sm-3">  
-                                <Card href = {book.volumeInfo.canonicalVolumeLink} style={{ 'marginTop': '10px'}} p="md" radius="md" component="a" className={classes.card}>  
-                                    <AspectRatio ratio={1920 / 1080}>
-                                        <Image src={book.volumeInfo.imageLinks !== undefined ? book.volumeInfo.imageLinks.thumbnail : ''} alt={book.title}/>
-                                    </AspectRatio>
-                                    <Text color="dimmed" size="xs" transform="uppercase" weight={700} mt="md">
-                                        {book.volumeInfo.authors}
-                                    </Text>
-                                    <Text className={classes.title} mt={5}>
-                                        {book.volumeInfo.title}
-                                    </Text>
-                                </Card>
-                        </div>  
+                        <Col >
+                            <Card href = {book.volumeInfo.canonicalVolumeLink} style={{ 'marginTop': '10px', 'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}} p="md" radius="md" component="a" className={classes.card}>  
+                                <AspectRatio ratio={1920 / 1080}>
+                                    <Image src={book.volumeInfo.imageLinks !== undefined ? book.volumeInfo.imageLinks.thumbnail : ''} alt={book.title}/>
+                                </AspectRatio>
+                                <Text color="dimmed" size="xs" transform="uppercase" weight={700} mt="md">
+                                    {authorCheck(book.volumeInfo.authors)}
+                                </Text>
+                                <Text className={classes.title} mt={5}>
+                                    {truncate(book.volumeInfo.title, 30)}
+                                </Text>
+                            
+                            </Card>
+                        </Col> 
                     ))}  
-                </div>  
+                </Row>  
             </div>
         </form>  
-  
     )  
 }  
   

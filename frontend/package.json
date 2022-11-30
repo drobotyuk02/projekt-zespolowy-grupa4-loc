@@ -16,6 +16,7 @@
     "axios": "^1.2.0",
     "boostrap": "^2.0.0",
     "bootstrap": "^5.2.2",
+    "framer-motion": "^7.6.15",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-bootstrap-sidebar-menu": "^2.0.3",
