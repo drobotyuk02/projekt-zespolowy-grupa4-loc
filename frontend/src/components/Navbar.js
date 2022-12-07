@@ -37,7 +37,7 @@ function NavbarComponent() {
     const productsCount = cart.items.reduce((sum, product) => sum + product.quantity, 0);
     return (
         <>
-            <Navbar  expand="sm">
+            <Navbar  expand="sm" style = {{'marginBottom':'50px', 'marginTop':'10px'}}>
                 <a href="#">
                     <img width= "50%" auto src={logo} alt="logoBrand"/>
                     {/* <img max-width= "50%" height="auto" auto src={logo} alt="logoBrand"/> */}

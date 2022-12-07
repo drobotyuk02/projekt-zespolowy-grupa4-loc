@@ -8,10 +8,11 @@ import axios from 'axios';
 //import 'bootstrap/dist/css/bootstrap.min.css';
 //import "react-pro-sidebar/dist/css/styles.css";
 import NavbarComponent from '../components/Navbar';
+import F2oter from '../components/F2oter';
 import PrimarySearchAppBar from '../components/Navbar1';
 import ArticlesCardsGrid  from '../components/Card';
 import GoogleBooksSearch from "../googleBooksSearch"; 
-import { createStyles, SimpleGrid, Card, Image, Text, Container, AspectRatio } from '@mantine/core';
+import { createStyles, SimpleGrid, Card, Image, Text, Container, AspectRatio, Footer } from '@mantine/core';
 import '../App.css';
 
 
@@ -33,9 +34,10 @@ function Store(){
   
     return(
         <>
+        
             <NavbarComponent></NavbarComponent>
             <GoogleBooksSearch></GoogleBooksSearch>
-
+            <F2oter></F2oter>
         </>
     ) 
 }

@@ -4,7 +4,8 @@ import { Col, Row } from 'react-bootstrap';
 import NavbarComponent from './components/Navbar';
 import { createStyles, SimpleGrid, Card, Image, Text, Container, AspectRatio, Center } from '@mantine/core';
 import './App.css';
-import { priceData } from "./data/prices";
+import './searchBar.scss';
+import Select from 'react-select';
 
 const useStyles = createStyles((theme) => ({
     card: {
@@ -35,7 +36,7 @@ function GoogleBooksSearch() {
     function handleSubmit(event) {  
         event.preventDefault();  
         ///axios.get("https://www.googleapis.com/books/v1/volumes?q=" + book + "&key=" + apiKey + "&maxResults=40")  
-        axios.get("https://www.googleapis.com/books/v1/volumes?q=" + book)     
+        axios.get("https://www.googleapis.com/books/v1/volumes?q=" + book + "&maxResults=20")     
         .then(data => {  
                 console.log(data.data.items);  
                 setResult(data.data.items);  
@@ -54,7 +55,7 @@ function GoogleBooksSearch() {
     function authorCheck(str){
         if (str === undefined) {
             return 'We found no author of this book 😔 '
-         }
+        }
         //str = truncate(str,30)
         const a = truncate(str,30);
         return a
@@ -65,19 +66,28 @@ function GoogleBooksSearch() {
         return a;
      }
 
+     useEffect(() => {
+        axios.get("https://www.googleapis.com/books/v1/volumes?q=book&maxResults=20")
+        .then(data => {  
+                console.log(data.data.items);  
+                setResult(data.data.items);  
+            })  
+     }, [])
+
     return ( 
+        <>
         <form style ={{'borderRadius':'15px','background': 'linear-gradient(120.08deg, #005AA7 0.53%, #FFFDE4 100%)'}} onSubmit={handleSubmit}>  
             <Center >
                 <div className=" card-header main-search">  
                     <div className="col-12 col-md-3 col-xl-3" > 
-                        <div style = {{'marginBottom': '45px'}}>
+                        <div class = "containerSearch" style = {{'marginBottom': '45px'}}>
                         <input style={{'marginTop':'25px'}}
                                 onChange={handleChange} 
                                 className="AutoFocus"
                                 placeholder="Type here..."
                                 type="text" 
                             />  
-                        
+                        <div class="search"></div>
                         </div>
                     </div>  
                 </div>
@@ -102,7 +112,8 @@ function GoogleBooksSearch() {
                     ))}  
                 </Row>  
             </div>
-        </form>  
+        </form> 
+    </>
     )  
 }  
   

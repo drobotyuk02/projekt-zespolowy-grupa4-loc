@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  height: 1vh;
 }
 
 .App-logo {
@@ -51,11 +52,7 @@ Form{
   margin-top: 7px;
   height: 200px;
 }
-.footerr{
-  margin-top: 220px;
-  background-color: rgba(26, 24, 24, 0.959);  
-  color : yellow;
-}
+
 .sidebar{
 float: left;
 }
