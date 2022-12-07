@@ -66,6 +66,9 @@ function ResetPassword() {
             Password Reset
           </Typography>
           <Box component="form" style={{backgroundColor: 'transparent'}} noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Typography component="h1" style={{color:'grey', fontSize:'12px'}}>
+            Please enter your email to reset your password
+          </Typography>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
