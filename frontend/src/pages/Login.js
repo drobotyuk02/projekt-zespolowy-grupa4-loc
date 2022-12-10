@@ -20,10 +20,29 @@ function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('username'),
-      password: data.get('password'),
-    });
+    const sendData = {
+      username: data.get('username'),
+      password: data.get('password')
+    }
+
+    console.log(sendData);
+
+    (async () => {
+      const rawResponse = await fetch("http://127.0.0.1:8082/auth/login", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify(sendData)
+    })
+
+    const content = await rawResponse.json();
+
+   console.log(content);
+  })()
+
   };
 //<h1>Welcome to the Bookly!</h1>
   return (
@@ -61,7 +80,7 @@ function Login() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -92,7 +111,7 @@ function Login() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign Up
+                Sign In
               </Button>
               <Grid container>
                 <Grid item xs>

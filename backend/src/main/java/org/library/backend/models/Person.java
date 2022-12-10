@@ -35,8 +35,8 @@ public class Person {
     @Column(name = "Name", length = 50)
     private String name;
 
-    @Size(max = 50)
-    @Column(name = "Password", length = 50)
+    @Size(max = 80)
+    @Column(name = "Password", length = 80)
     private String password;
 
     @Column(name = "Phone_number")

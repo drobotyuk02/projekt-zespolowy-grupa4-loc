@@ -8,6 +8,7 @@ import Success from './pages/Success';
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
 import ResetPassword from "./pages/ResetPassword";
+import AdminPanel from './pages/AdminPanel';
 import CartProvider from './CartContext';
 import { Container } from "react-bootstrap";
 import { Link } from 'react-router-dom';
@@ -31,6 +32,7 @@ function App() {
                   <Route path="registration" element={<Registration />} />
                   <Route path="login" element={<Login />} />
                   <Route path="passreset" element={<ResetPassword />} />
+                  <Route path="adminPanel" element={<AdminPanel />} />
                 </Routes>
               </BrowserRouter>
           </Container>

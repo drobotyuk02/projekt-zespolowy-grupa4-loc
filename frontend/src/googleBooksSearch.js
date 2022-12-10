@@ -80,22 +80,22 @@ function GoogleBooksSearch() {
             <Center >
                 <div className=" card-header main-search">  
                     <div className="col-12 col-md-3 col-xl-3" > 
-                        <div class = "containerSearch" style = {{'marginBottom': '45px'}}>
+                        <div className = "containerSearch" style = {{'marginBottom': '45px'}}>
                         <input style={{'marginTop':'25px'}}
                                 onChange={handleChange} 
                                 className="AutoFocus"
                                 placeholder="Type here..."
                                 type="text" 
                             />  
-                        <div class="search"></div>
+                        <div className="search"></div>
                         </div>
                     </div>  
                 </div>
             </Center>
             <div className="container">  
                 <Row xs={1} md={4} className="g-4" >
-                    {result.map(book => (  
-                        <Col >
+                    {result.map(book => (
+                        <Col key={book.id}>
                             <Card href = {book.volumeInfo.canonicalVolumeLink} style={{ 'marginTop': '10px', 'boxShadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}} p="md" radius="md" component="a" className={classes.card}>  
                                 <AspectRatio ratio={1920 / 1080}>
                                     <Image src={book.volumeInfo.imageLinks !== undefined ? book.volumeInfo.imageLinks.thumbnail : ''} alt={book.title}/>

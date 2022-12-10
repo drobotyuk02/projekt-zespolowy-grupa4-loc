@@ -39,7 +39,7 @@ function NavbarComponent() {
         <>
             <Navbar  expand="sm" style = {{'marginBottom':'50px', 'marginTop':'10px'}}>
                 <a href="#">
-                    <img width= "50%" auto src={logo} alt="logoBrand"/>
+                    <img width= "50%" src={logo} alt="logoBrand"/>
                     {/* <img max-width= "50%" height="auto" auto src={logo} alt="logoBrand"/> */}
                 </a>
 

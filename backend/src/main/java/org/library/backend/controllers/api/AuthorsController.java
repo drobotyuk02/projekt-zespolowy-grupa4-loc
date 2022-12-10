@@ -5,11 +5,16 @@ import org.library.backend.models.Author;
 import org.library.backend.repositories.AuthorRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
+@CrossOrigin("http://localhost:3000")
 @RequestMapping("/api/author")
 public class AuthorsController {
 
@@ -28,8 +33,15 @@ public class AuthorsController {
     }
 
     @GetMapping("/{id}")
-    public Author findById(@PathVariable int id) {
-        return authorRepository.findById(id).orElse(null);
+    public ResponseEntity<Author> findById(@PathVariable int id) {
+        var res = authorRepository.findById(id).orElse(null);
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//        headers.setAccessControlAllowMethods(Collections.singletonList(HttpMethod.POST));
+//        headers.setAccessControlAllowHeaders(Arrays.asList("Content-Type", "Authorization"));
+//        headers.setAccessControlAllowCredentials(true);
+
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @PostMapping

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Timestamp;
 
 @Controller
+@CrossOrigin("http://localhost:3000")
 @RequestMapping("/")
 public class HomeController {
 
