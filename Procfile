@@ -1,1 +1,1 @@
-web: java -jar target/backend-0.0.1-SNAPSHOT.jar && npm start
+web: cd backend && java -jar target/backend-0.0.1-SNAPSHOT.jar && cd ../frontend && npm start
