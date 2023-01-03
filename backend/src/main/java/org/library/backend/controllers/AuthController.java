@@ -17,11 +17,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -43,7 +43,7 @@ public class AuthController {
     private final ModelMapper modelMapper;
 
     @Autowired
-    public AuthController(AuthenticationManager authenticationManager, RegistrationService registrationService, PasswordEncoder passwordEncoder, PersonValidator personValidator, ModelMapper modelMapper) {
+    public AuthController(AuthenticationManager authenticationManager, RegistrationService registrationService, PersonValidator personValidator, ModelMapper modelMapper) {
         this.authenticationManager = authenticationManager;
         this.registrationService = registrationService;
         this.personValidator = personValidator;
@@ -71,7 +71,7 @@ public class AuthController {
 
         registrationService.register(person);
 
-        String response = "{\"msg\": \"Success\"";
+        String response = "{\"msg\": \"Success\"}";
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -97,7 +97,7 @@ public class AuthController {
     @ResponseBody
     @PostMapping("/login")
     public PersonDetails performLogin(HttpServletRequest req, @RequestBody BasicPersonLoginDTO authDTO) {
-        // TODO add verificatopn of session, if not already logged in
+        // TODO add verification of session, if not already logged in
 
         Authentication authentication;
         SecurityContext securityContext;
@@ -112,11 +112,14 @@ public class AuthController {
             securityContext = SecurityContextHolder.getContext();
             securityContext.setAuthentication(authentication);
             httpSession = req.getSession(true);
-//            httpSession.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, securityContext);
-            httpSession.setAttribute("AAAAAAAAAAA", securityContext);
+            httpSession.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, securityContext);
+//            httpSession.setAttribute("AAAAAAAAAAA", securityContext);
         } catch (BadCredentialsException e) {
             //should also catch Locked and Disabled exceptions to ensure contracts
             throw new UserAuthException(e.getMessage());
+        } catch (DisabledException e) {
+            //needs to be reworked to notify user of disabled account (confirm letter should be sent to email)
+            throw new UserAuthException("User has a disabled status. Perhaps user didn't confirm it through email?");
         }
 
         System.out.println(securityContext.getAuthentication().getPrincipal());
@@ -130,7 +133,7 @@ public class AuthController {
         genErr.setMessage(e.getMessage());
         genErr.setTime(new Timestamp(System.currentTimeMillis()));
 
-        return new ResponseEntity<>(genErr, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(genErr, HttpStatus.UNAUTHORIZED);
     }
 
     public Person convertToPerson(PersonRegistrationDTO personDTO) {
