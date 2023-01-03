@@ -70,15 +70,15 @@ public class Person {
 
     @OneToMany(mappedBy = "personID")
     @JsonManagedReference
-    private Set<RessetPassToken> ressetPassTokens = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "personID")
-    @JsonManagedReference
     private Set<Address> addresses = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "personID")
     @JsonManagedReference
     private Set<Subscription> subscriptions = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "personID")
+    @JsonManagedReference
+    private Set<Restoration> restorations = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "personID")
     @JsonManagedReference

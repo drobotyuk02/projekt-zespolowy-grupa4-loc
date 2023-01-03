@@ -41,6 +41,9 @@ public class Product {
     @Column(name = "Picture_url", length = 150)
     private String pictureUrl;
 
+    @Column(name = "Rating")
+    private BigDecimal rating;
+
     @Column(name = "Rent_price")
     private BigDecimal rentPrice;
 
