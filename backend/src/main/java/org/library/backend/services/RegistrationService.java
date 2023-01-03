@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
+import java.time.Instant;
 
 @Service
 public class RegistrationService {
@@ -30,7 +31,9 @@ public class RegistrationService {
 
         person.setPassword(passwordEncoder.encode(person.getPassword()));
         person.setRole("ROLE_USER");
-        person.setCreatedAt(new Date(System.currentTimeMillis()).toLocalDate());
+        person.setCreatedAt(Instant.now());
+        person.setIsEnabled(false);
+        person.setIsRestricted(false);
         personRepository.save(person);
     }
 

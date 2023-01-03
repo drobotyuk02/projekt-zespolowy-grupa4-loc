@@ -1,19 +1,17 @@
 package org.library.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -29,16 +27,19 @@ public class Product {
     @Column(name = "Buy_price")
     private BigDecimal buyPrice;
 
-    @Size(max = 50)
-    @Column(name = "Category", length = 50)
-    private String category;
-
     @Column(name = "Date_of_issue")
     private LocalDate dateOfIssue;
 
-    @Size(max = 50)
-    @Column(name = "Description", length = 50)
+    @Size(max = 200)
+    @Column(name = "Description", length = 200)
     private String description;
+
+    @Column(name = "Picture_blob")
+    private byte[] pictureBlob;
+
+    @Size(max = 150)
+    @Column(name = "Picture_url", length = 150)
+    private String pictureUrl;
 
     @Column(name = "Rent_price")
     private BigDecimal rentPrice;
@@ -47,12 +48,13 @@ public class Product {
     @Column(name = "Title", length = 50)
     private String title;
 
-    @Size(max = 50)
-    @Column(name = "Type", length = 50)
+    @Size(max = 15)
+    @Column(name = "Type", length = 15)
     private String type;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "AuthorID")
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "AuthorID", nullable = false)
     @JsonBackReference
     private Author authorID;
 
@@ -61,8 +63,10 @@ public class Product {
     @JsonBackReference
     private Order orderID;
 
-    @OneToMany(mappedBy = "productID")
-    @JsonManagedReference
+    @ManyToMany
+    @JoinTable(name = "ProductCategory",
+            joinColumns = @JoinColumn(name = "ProductID"),
+            inverseJoinColumns = @JoinColumn(name = "CategoryID"))
     private Set<Category> categories = new LinkedHashSet<>();
 
 }

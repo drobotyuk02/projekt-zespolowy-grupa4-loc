@@ -1,17 +1,15 @@
 package org.library.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -25,25 +23,31 @@ public class Person {
     private Integer id;
 
     @Column(name = "Created_at")
-    private LocalDate createdAt;
+    private Instant createdAt;
 
-    @Size(max = 50)
-    @Column(name = "Email", length = 50)
+    @Size(max = 60)
+    @Column(name = "Email", length = 60)
     private String email;
 
-    @Size(max = 50)
-    @Column(name = "Name", length = 50)
+    @Column(name = "Is_enabled")
+    private Boolean isEnabled;
+
+    @Column(name = "Is_restricted")
+    private Boolean isRestricted;
+
+    @Size(max = 30)
+    @Column(name = "Name", length = 30)
     private String name;
 
-    @Size(max = 80)
-    @Column(name = "Password", length = 80)
+    @Size(max = 75)
+    @Column(name = "Password", length = 75)
     private String password;
 
     @Column(name = "Phone_number")
     private Integer phoneNumber;
 
-    @Size(max = 50)
-    @Column(name = "Role", length = 50)
+    @Size(max = 17)
+    @Column(name = "Role", length = 17)
     private String role;
 
     @Size(max = 50)
@@ -51,11 +55,14 @@ public class Person {
     private String surname;
 
     @Column(name = "Updated_at")
-    private LocalDate updatedAt;
+    private Instant updatedAt;
 
-    @Size(max = 50)
-    @Column(name = "Username", length = 50)
+    @Size(max = 30)
+    @Column(name = "Username", length = 30)
     private String username;
+
+    @Column(name = "AddressID")
+    private Integer addressID;
 
     @OneToMany(mappedBy = "personID")
     @JsonManagedReference
@@ -63,11 +70,15 @@ public class Person {
 
     @OneToMany(mappedBy = "personID")
     @JsonManagedReference
-    private Set<Subscription> subscriptions = new LinkedHashSet<>();
+    private Set<RessetPassToken> ressetPassTokens = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "personID")
     @JsonManagedReference
-    private Set<PersonAddress> personAddresses = new LinkedHashSet<>();
+    private Set<Address> addresses = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "personID")
+    @JsonManagedReference
+    private Set<Subscription> subscriptions = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "personID")
     @JsonManagedReference

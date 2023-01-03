@@ -2,17 +2,16 @@ package org.library.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -31,8 +30,8 @@ public class Order {
     @Column(name = "Date_rent_from")
     private LocalDate dateRentFrom;
 
-    @Size(max = 50)
-    @Column(name = "Description", length = 50)
+    @Size(max = 150)
+    @Column(name = "Description", length = 150)
     private String description;
 
     @Column(name = "Order_date")
@@ -41,8 +40,17 @@ public class Order {
     @Column(name = "Quantity")
     private Integer quantity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PersonID")
+    @Size(max = 20)
+    @Column(name = "Status", length = 20)
+    private String status;
+
+    @Size(max = 5)
+    @Column(name = "Type", length = 5)
+    private String type;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "PersonID", nullable = false)
     @JsonBackReference
     private Person personID;
 
@@ -53,9 +61,5 @@ public class Order {
     @OneToMany(mappedBy = "orderID")
     @JsonManagedReference
     private Set<Address> addresses = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "orderID")
-    @JsonManagedReference
-    private Set<OrderAddress> orderAddresses = new LinkedHashSet<>();
 
 }

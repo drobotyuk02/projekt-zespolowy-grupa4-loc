@@ -14,23 +14,19 @@ import java.time.Instant;
 @Getter
 @Setter
 @Entity
-@Table(name = "Subscription")
-public class Subscription {
+@Table(name = "Resset_pass_token")
+public class RessetPassToken {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "SubscriptionID", nullable = false)
+    @Column(name = "Resset_pass_tokenID", nullable = false)
     private Integer id;
 
-    @Column(name = "Subscribed_at")
-    private Instant subscribedAt;
+    @Column(name = "Reset_at")
+    private Instant resetAt;
 
     @Size(max = 75)
-    @Column(name = "Subscription_token", length = 75)
-    private String subscriptionToken;
-
-    @Size(max = 10)
-    @Column(name = "Subscription_type", length = 10)
-    private String subscriptionType;
+    @Column(name = "Reset_token", length = 75)
+    private String resetToken;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
