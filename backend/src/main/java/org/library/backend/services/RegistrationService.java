@@ -31,7 +31,7 @@ public class RegistrationService {
         }
 
         person.setPassword(passwordEncoder.encode(person.getPassword()));
-        person.setRole(PersonRole.ROLE_USER);
+        person.setRole("ROLE_USER");
         person.setCreatedAt(Instant.now());
         person.setIsEnabled(false);
         person.setIsRestricted(false);
