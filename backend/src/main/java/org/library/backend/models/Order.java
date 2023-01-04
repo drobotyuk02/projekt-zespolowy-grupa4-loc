@@ -47,7 +47,7 @@ public class Order {
 
     @Size(max = 5)
     @Column(name = "Type", length = 5)
-    private OrderType type;
+    private String type;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

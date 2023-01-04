@@ -56,7 +56,7 @@ public class Product {
 
     @Size(max = 15)
     @Column(name = "Type", length = 15)
-    private ProductType type;
+    private String type;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

@@ -49,7 +49,7 @@ public class Person {
 
     @Size(max = 17)
     @Column(name = "Role", length = 17)
-    private PersonRole role;
+    private String role;
 
     @Size(max = 50)
     @Column(name = "Surname", length = 50)
