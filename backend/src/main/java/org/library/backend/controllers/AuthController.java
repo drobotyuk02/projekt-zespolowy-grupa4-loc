@@ -31,9 +31,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.sql.Timestamp;
+import java.util.List;
+
+import static java.util.List.*;
 
 @Controller
-@CrossOrigin(value = "http://localhost:3000", allowCredentials = "true", origins = "http://localhost:3000")
+@CrossOrigin(allowCredentials = "true", origins = {"http://localhost:3000", "http://localhost:8082"})
 @RequestMapping("/auth")
 public class AuthController {
 
@@ -73,6 +76,13 @@ public class AuthController {
 
         String response = "{\"msg\": \"Success\"}";
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    // /auth/registration?confirm_token=ldkfmadslm
+    @ResponseBody
+    @GetMapping("/registration")
+    public ResponseEntity<String> confirmRegistration(@RequestParam String token){
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @GetMapping("/registrationPage")

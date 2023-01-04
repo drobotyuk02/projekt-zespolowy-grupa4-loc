@@ -2,6 +2,7 @@ package org.library.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
+import org.library.backend.util.constants.ProductType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -34,6 +35,8 @@ public class Product {
     @Column(name = "Description", length = 200)
     private String description;
 
+    //String full_description;
+
     @Column(name = "Picture_blob")
     private byte[] pictureBlob;
 
@@ -53,7 +56,7 @@ public class Product {
 
     @Size(max = 15)
     @Column(name = "Type", length = 15)
-    private String type;
+    private ProductType type;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

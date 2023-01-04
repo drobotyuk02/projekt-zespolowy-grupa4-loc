@@ -38,7 +38,7 @@ public class PersonDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return this.person.getRole().equals(""); //should be enum
     }
 
     @Override
@@ -48,7 +48,7 @@ public class PersonDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.person.getIsEnabled();
     }
 
     public Person getPerson() {

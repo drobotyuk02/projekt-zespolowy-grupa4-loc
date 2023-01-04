@@ -3,6 +3,7 @@ package org.library.backend.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import org.library.backend.util.constants.OrderType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -46,7 +47,7 @@ public class Order {
 
     @Size(max = 5)
     @Column(name = "Type", length = 5)
-    private String type;
+    private OrderType type;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

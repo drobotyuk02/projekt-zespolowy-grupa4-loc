@@ -2,6 +2,7 @@ package org.library.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import org.library.backend.util.constants.PersonRole;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -48,7 +49,7 @@ public class Person {
 
     @Size(max = 17)
     @Column(name = "Role", length = 17)
-    private String role;
+    private PersonRole role;
 
     @Size(max = 50)
     @Column(name = "Surname", length = 50)
