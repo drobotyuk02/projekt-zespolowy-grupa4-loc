@@ -70,7 +70,7 @@ public class SecurityConfig { // extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/auth/login", "/auth/registration", "/error").permitAll()
                // .anyRequest().hasAnyRole("USER", "ADMIN")
                 //roles USER, SUBSCRIBED, PRIVILEGED, ADMIN, default anonymous

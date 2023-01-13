@@ -81,8 +81,8 @@ public class AuthController {
     // /auth/registration?confirm_token=ldkfmadslm
     @ResponseBody
     @GetMapping("/registration")
-    public ResponseEntity<String> confirmRegistration(@RequestParam String token){
-        return new ResponseEntity<>("", HttpStatus.OK);
+    public ResponseEntity<String> confirmRegistration(@RequestParam String confirm_token) {
+        return new ResponseEntity<>("", HttpStatus.PERMANENT_REDIRECT);
     }
 
     @GetMapping("/registrationPage")
@@ -106,7 +106,7 @@ public class AuthController {
 
     @ResponseBody
     @PostMapping("/login")
-    public PersonDetails performLogin(HttpServletRequest req, @RequestBody BasicPersonLoginDTO authDTO) {
+    public ResponseEntity<String> performLogin(HttpServletRequest req, @RequestBody BasicPersonLoginDTO authDTO) {
         // TODO add verification of session, if not already logged in
 
         Authentication authentication;
@@ -134,7 +134,8 @@ public class AuthController {
 
         System.out.println(securityContext.getAuthentication().getPrincipal());
 
-        return (PersonDetails) authentication.getPrincipal();
+
+        return new ResponseEntity<>("{\"status\": \"success\"}", HttpStatus.OK);
     }
 
     @ExceptionHandler
