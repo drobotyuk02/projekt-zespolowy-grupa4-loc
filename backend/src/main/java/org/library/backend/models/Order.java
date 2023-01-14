@@ -39,11 +39,9 @@ public class Order {
     @Column(name = "Quantity")
     private Integer quantity;
 
-    @Size(max = 20)
     @Column(name = "Status", length = 20)
     private StatusType status;
 
-    @Size(max = 5)
     @Column(name = "Type", length = 5)
     private OrderType type;
 

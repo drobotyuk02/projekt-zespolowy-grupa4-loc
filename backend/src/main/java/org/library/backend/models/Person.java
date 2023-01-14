@@ -48,7 +48,6 @@ public class Person {
     @Column(name = "Phone_number")
     private Integer phoneNumber;
 
-    @Size(max = 17)
     @Column(name = "Role", length = 17)
     private PersonRole role;
 

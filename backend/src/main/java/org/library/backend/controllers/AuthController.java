@@ -36,7 +36,7 @@ import java.util.List;
 import static java.util.List.*;
 
 @Controller
-@CrossOrigin(allowCredentials = "true", origins = {"http://localhost:3000", "http://localhost:8082"})
+@CrossOrigin(value = "http://127.0.0.1:5173")
 @RequestMapping("/auth")
 public class AuthController {
 
@@ -74,7 +74,7 @@ public class AuthController {
 
         registrationService.register(person);
 
-        String response = "{msg: Success}";
+        String response = "{\"msg\": \"Success\"}";
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
