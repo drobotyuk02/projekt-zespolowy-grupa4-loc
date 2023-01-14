@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.library.backend.util.constants.PersonRole;
 
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -25,15 +26,12 @@ public class PersonDTO implements Serializable {
     private Boolean isRestricted;
     @Size(max = 30)
     private String name;
-    @Size(max = 75)
-    private String password;
     private Integer phoneNumber;
     @Size(max = 17)
-    private String role;
+    private PersonRole role;
     @Size(max = 50)
     private String surname;
     private Instant updatedAt;
     @Size(max = 30)
     private String username;
-    private Integer addressID;
 }

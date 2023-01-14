@@ -1,8 +1,8 @@
 package org.library.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-import org.library.backend.util.constants.ProductType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -31,18 +31,16 @@ public class Product {
     @Column(name = "Date_of_issue")
     private LocalDate dateOfIssue;
 
-    @Size(max = 200)
-    @Column(name = "Description", length = 200)
+    @Size(max = 50)
+    @Column(name = "Description", length = 50)
     private String description;
 
-    //String full_description;
-
-    @Column(name = "Picture_blob")
-    private byte[] pictureBlob;
-
-    @Size(max = 150)
-    @Column(name = "Picture_url", length = 150)
+    @Size(max = 50)
+    @Column(name = "Picture_url", length = 50)
     private String pictureUrl;
+
+    @Column(name = "Quantity")
+    private Integer quantity;
 
     @Column(name = "Rating")
     private BigDecimal rating;
@@ -54,8 +52,8 @@ public class Product {
     @Column(name = "Title", length = 50)
     private String title;
 
-    @Size(max = 15)
-    @Column(name = "Type", length = 15)
+    @Size(max = 50)
+    @Column(name = "Type", length = 50)
     private String type;
 
     @NotNull
@@ -64,15 +62,22 @@ public class Product {
     @JsonBackReference
     private Author authorID;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "OrderID")
-    @JsonBackReference
-    private Order orderID;
+    @OneToMany(mappedBy = "productID")
+    @JsonManagedReference
+    private Set<Order> orders = new LinkedHashSet<>();
 
     @ManyToMany
     @JoinTable(name = "ProductCategory",
             joinColumns = @JoinColumn(name = "ProductID"),
             inverseJoinColumns = @JoinColumn(name = "CategoryID"))
     private Set<Category> categories = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "productID")
+    @JsonManagedReference
+    private Set<Bookmark> bookmarks = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "productID")
+    @JsonManagedReference
+    private Set<Comment> comments = new LinkedHashSet<>();
 
 }

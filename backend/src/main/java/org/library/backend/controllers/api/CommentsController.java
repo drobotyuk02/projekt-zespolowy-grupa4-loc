@@ -1,7 +1,8 @@
 package org.library.backend.controllers.api;
 
-import org.library.backend.models.Subscription;
-import org.library.backend.repositories.SubscriptionRepository;
+import jdk.dynalink.linker.LinkerServices;
+import org.library.backend.models.Comment;
+import org.library.backend.repositories.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,17 +13,18 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(value = "http://localhost:3000", allowCredentials = "true")
-@RequestMapping("/api/subscriptions")
-public class SubscriptionsController {
-    private final SubscriptionRepository subscriptionRepository;
+@RequestMapping("/api/comments")
+public class CommentsController {
+
+    private final CommentRepository commentRepository;
 
     @Autowired
-    public SubscriptionsController(SubscriptionRepository subscriptionRepository) {
-        this.subscriptionRepository = subscriptionRepository;
+    public CommentsController(CommentRepository commentRepository) {
+        this.commentRepository = commentRepository;
     }
 
     @GetMapping
-    public List<Subscription> index() {
-        return subscriptionRepository.findAll();
+    public List<Comment> index() {
+        return commentRepository.findAll();
     }
 }

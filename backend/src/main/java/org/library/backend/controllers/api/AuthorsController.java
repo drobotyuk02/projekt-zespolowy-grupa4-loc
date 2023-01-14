@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(value = "http://localhost:3000", allowCredentials = "true")
-@RequestMapping("/api/author")
+@RequestMapping("/api/authors")
 public class AuthorsController {
 
     private final AuthorRepository authorRepository;

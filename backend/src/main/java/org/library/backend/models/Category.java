@@ -1,6 +1,5 @@
 package org.library.backend.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,14 +30,9 @@ public class Category {
     private String description;
 
     @Size(max = 20)
-    @Column(name = "Type", length = 20)
-    private String type;
-
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "ProductID", nullable = false)
-    @JsonBackReference
-    private Product productID;
+    @Column(name = "Type", nullable = false, length = 20)
+    private String type;
 
     @ManyToMany
     @JoinTable(name = "ProductCategory",

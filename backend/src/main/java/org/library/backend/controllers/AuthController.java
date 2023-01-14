@@ -74,7 +74,7 @@ public class AuthController {
 
         registrationService.register(person);
 
-        String response = "{\"msg\": \"Success\"}";
+        String response = "{msg: Success}";
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

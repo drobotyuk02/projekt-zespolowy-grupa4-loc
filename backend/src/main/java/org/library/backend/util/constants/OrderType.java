@@ -1,8 +1,8 @@
 package org.library.backend.util.constants;
 
 public enum OrderType {
-    ORDER_BUY("ORDER_BUY"),
-    ORDER_LOAN("ORDER_LOAN");
+    ORDER_BUY("BUY"),
+    ORDER_LOAN("LOAN");
 
     OrderType(String orderLoan) {
     }

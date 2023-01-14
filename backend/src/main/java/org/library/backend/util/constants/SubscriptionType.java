@@ -1,8 +1,12 @@
 package org.library.backend.util.constants;
 
 public enum SubscriptionType {
-    MONTHLY,
-    QUARTERLY,
-    ANNUALLY,
-    LIFETIME
+    MONTHLY("MONTHLY"),
+    QUARTERLY("QUARTERLY"),
+    ANNUALLY("ANNUALLY"),
+    LIFETIME("LIFETIME");
+
+    SubscriptionType(String type) {
+
+    }
 }

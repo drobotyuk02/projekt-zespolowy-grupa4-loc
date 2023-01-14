@@ -1,10 +1,9 @@
 package org.library.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Builder
 @AllArgsConstructor
@@ -16,5 +15,17 @@ import javax.persistence.Table;
 public class ProductCategory {
     @EmbeddedId
     private ProductCategoryId id;
+
+    @MapsId("categoryID")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "CategoryID", nullable = false)
+    @JsonBackReference
+    private Category categoryID;
+
+    @MapsId("productID")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ProductID", nullable = false)
+    @JsonBackReference
+    private Product productID;
 
 }

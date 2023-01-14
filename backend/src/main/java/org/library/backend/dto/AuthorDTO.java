@@ -26,7 +26,6 @@ public class AuthorDTO implements Serializable {
     private LocalDate dateOfDeath;
     @Size(max = 30)
     private String name;
-    private byte[] pictureBlob;
     @Size(max = 150)
     private String pictureUrl;
     @Size(max = 50)

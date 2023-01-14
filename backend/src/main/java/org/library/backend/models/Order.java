@@ -1,16 +1,14 @@
 package org.library.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.library.backend.util.constants.OrderType;
+import org.library.backend.util.constants.StatusType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -43,11 +41,17 @@ public class Order {
 
     @Size(max = 20)
     @Column(name = "Status", length = 20)
-    private String status;
+    private StatusType status;
 
     @Size(max = 5)
     @Column(name = "Type", length = 5)
-    private String type;
+    private OrderType type;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "AddressID", nullable = false)
+    @JsonBackReference
+    private Address addressID;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -55,12 +59,10 @@ public class Order {
     @JsonBackReference
     private Person personID;
 
-    @OneToMany(mappedBy = "orderID")
-    @JsonManagedReference
-    private Set<Product> products = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "orderID")
-    @JsonManagedReference
-    private Set<Address> addresses = new LinkedHashSet<>();
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ProductID", nullable = false)
+    @JsonBackReference
+    private Product productID;
 
 }

@@ -1,10 +1,12 @@
 package org.library.backend.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -50,14 +52,12 @@ public class Address {
     @Column(name = "Street_number", length = 12)
     private String streetNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "OrderID")
-    @JsonBackReference
-    private Order orderID;
+    @OneToMany(mappedBy = "addressID")
+    @JsonManagedReference
+    private Set<Order> orders = new LinkedHashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PersonID")
-    @JsonBackReference
-    private Person personID;
+    @OneToMany(mappedBy = "addressID")
+    @JsonManagedReference
+    private Set<Person> people = new LinkedHashSet<>();
 
 }

@@ -1,5 +1,6 @@
 package org.library.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.library.backend.util.constants.PersonRole;
@@ -49,7 +50,7 @@ public class Person {
 
     @Size(max = 17)
     @Column(name = "Role", length = 17)
-    private String role;
+    private PersonRole role;
 
     @Size(max = 50)
     @Column(name = "Surname", length = 50)
@@ -62,16 +63,14 @@ public class Person {
     @Column(name = "Username", length = 30)
     private String username;
 
-    @Column(name = "AddressID")
-    private Integer addressID;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "AddressID")
+    @JsonBackReference
+    private Address addressID;
 
     @OneToMany(mappedBy = "personID")
     @JsonManagedReference
     private Set<Order> orders = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "personID")
-    @JsonManagedReference
-    private Set<Address> addresses = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "personID")
     @JsonManagedReference
@@ -83,6 +82,14 @@ public class Person {
 
     @OneToMany(mappedBy = "personID")
     @JsonManagedReference
+    private Set<Bookmark> bookmarks = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "personID")
+    @JsonManagedReference
     private Set<Registration> registrations = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "personID")
+    @JsonManagedReference
+    private Set<Comment> comments = new LinkedHashSet<>();
 
 }

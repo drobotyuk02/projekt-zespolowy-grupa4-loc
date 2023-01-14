@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/person")
+@RequestMapping("/api/people")
 public class PeopleController {
 
     private final PersonRepository personRepository;

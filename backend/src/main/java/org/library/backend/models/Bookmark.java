@@ -2,7 +2,6 @@ package org.library.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
-import org.library.backend.util.constants.SubscriptionType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -15,28 +14,30 @@ import java.time.Instant;
 @Getter
 @Setter
 @Entity
-@Table(name = "Subscription")
-public class Subscription {
+@Table(name = "Bookmark")
+public class Bookmark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "SubscriptionID", nullable = false)
+    @Column(name = "BookmarkID", nullable = false)
     private Integer id;
 
-    @Column(name = "Subscribed_at")
-    private Instant subscribedAt;
+    @Column(name = "Created_at")
+    private Instant createdAt;
 
-    @Size(max = 75)
-    @Column(name = "Subscription_token", length = 75)
-    private String subscriptionToken;
-
-    @Size(max = 10)
-    @Column(name = "Subscription_type", length = 10)
-    private SubscriptionType subscriptionType;
+    @Size(max = 50)
+    @Column(name = "Description", length = 50)
+    private String description;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PersonID", nullable = false)
     @JsonBackReference
     private Person personID;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ProductID", nullable = false)
+    @JsonBackReference
+    private Product productID;
 
 }

@@ -40,9 +40,6 @@ public class Author {
     @Column(name = "Name", length = 30)
     private String name;
 
-    @Column(name = "Picture_blob")
-    private byte[] pictureBlob;
-
     @Size(max = 150)
     @Column(name = "Picture_url", length = 150)
     private String pictureUrl;
