@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.library.backend.util.constants.ProductType;
+import org.springframework.web.bind.annotation.Mapping;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -54,6 +55,7 @@ public class Product {
     private String title;
 
     @Column(name = "Type", length = 50)
+    @Enumerated(EnumType.STRING)
     private ProductType type;
 
     @NotNull

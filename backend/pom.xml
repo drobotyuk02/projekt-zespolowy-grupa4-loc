@@ -17,6 +17,8 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
 	<dependencies>
@@ -46,11 +48,18 @@
 		</dependency>
 
 
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-devtools</artifactId>-->
+<!--			<scope>runtime</scope>-->
+<!--			<optional>true</optional>-->
+<!--		</dependency>-->
+
+		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.12</version>
 		</dependency>
 
 		<dependency>
@@ -84,12 +93,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.6.14</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 			<exclusions>
@@ -104,10 +107,26 @@
 
 
 	<build>
+	<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+						  <goal>build-info</goal>
+						</goals>
+						<configuration>
+							<additionalProperties>
+								<encoding.source>${project.build.sourceEncoding}</encoding.source>
+								<encoding.reporting>${project.reporting.outputEncoding}</encoding.reporting>
+								<java.source>${maven.compiler.source}</java.source>
+								<java.target>${maven.compiler.target}</java.target>
+							</additionalProperties>
+						</configuration>
+					</execution>
+				</executions>
 				<configuration>
 					<excludes>
 						<exclude>

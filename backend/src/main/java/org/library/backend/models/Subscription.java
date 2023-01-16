@@ -31,6 +31,7 @@ public class Subscription {
 
     @Size(max = 10)
     @Column(name = "Subscription_type", length = 10)
+    @Enumerated(EnumType.STRING)
     private SubscriptionType subscriptionType;
 
     @NotNull

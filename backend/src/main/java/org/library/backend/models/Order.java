@@ -40,9 +40,11 @@ public class Order {
     private Integer quantity;
 
     @Column(name = "Status", length = 20)
+    @Enumerated(EnumType.STRING)
     private StatusType status;
 
     @Column(name = "Type", length = 5)
+    @Enumerated(EnumType.STRING)
     private OrderType type;
 
     @NotNull
