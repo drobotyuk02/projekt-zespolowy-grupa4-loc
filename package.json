@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "main": "frontend/src/index.js",
+  "main": "frontend/src/main.jsx",
   "engines": {
     "node": "16.x"
   },
