@@ -10,7 +10,7 @@
   "scripts": {
     "start": "cd frontend && vite --port $PORT --host 0.0.0.0",
     "dev": "cd frontend && vite",
-    "build": "npm cache clean --force && vite build --minify false --base=/frontend",
+    "build": "npm cache clean --force && cd frontend && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
