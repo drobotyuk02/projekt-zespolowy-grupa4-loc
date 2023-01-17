@@ -36,7 +36,7 @@ import java.util.List;
 import static java.util.List.*;
 
 @Controller
-@CrossOrigin(value = "http://127.0.0.1:5173")
+@CrossOrigin
 @RequestMapping("/auth")
 public class AuthController {
 
