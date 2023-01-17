@@ -21,7 +21,7 @@ const ProductsList = () => {
     useEffect(() => {
 
         async function fetch() {
-            const response = await axios.get("http://localhost:8080/api/products", {
+            const response = await axios.get("http://0.0.0.0:8082/api/products", {
                 headers: {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*'
