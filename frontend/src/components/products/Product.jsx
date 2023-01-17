@@ -35,12 +35,12 @@ const Product = (props) => {
                 {/*<Text weight={500}>{productsArray.title}</Text>*/}
                 <Rating readOnly value={props.rating} fractions={8}/>
                 {/*adjust and add new field to a product, hahahAHAHAHAHAHAHAAH AGAIN (for isOnSale, isForRent)*/}
-                <Badge color="pink" variant="light">
+                {!props.isOnSale && <Badge color="pink" variant="light">
                     On Sale
-                </Badge>
-                <Badge color="yellow.6" variant="light">
+                </Badge>}
+                {!props.isForRent && <Badge color="yellow.6" variant="light">
                     Borrow now
-                </Badge>
+                </Badge>}
             </Group>
 
             <Text size="sm" color="dimmed">

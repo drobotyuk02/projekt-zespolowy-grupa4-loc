@@ -6,11 +6,17 @@ import SingleProduct from "../../pages/SingleProduct.jsx"; //changed to SinglePr
 
 // thats FINALLY explains smth, nuts 🥜🥜
 import Product from "./Product.jsx";
-import {Card, Container, SimpleGrid} from "@mantine/core";
+import {Card, Container, Pagination, SimpleGrid, Text} from "@mantine/core";
 import ProductPlaceholder from "./ProductPlaceholder.jsx";
+import {searchValue} from "../UI/Search.jsx";
 
 const ProductsList = () => {
     let [products, setProducts] = useState([])
+    const [searchBar, setSearchbar] = useState(searchValue)
+
+    useEffect(() => {
+        setSearchbar(searchValue)
+    }, [searchValue])
 
     useEffect(() => {
 
@@ -47,6 +53,7 @@ const ProductsList = () => {
                 { maxWidth: 'sm', cols: 2, spacing: 'sm' },
                 { maxWidth: 'xs', cols: 1, spacing: 'sm' },
             ]}>
+                <div><Text>{searchBar}</Text></div>
                 {wrappedProducts}
                 <ProductPlaceholder />
                 <ProductPlaceholder />
@@ -65,6 +72,7 @@ const ProductsList = () => {
                 <ProductPlaceholder />
                 <ProductPlaceholder />
             </SimpleGrid>
+            <Pagination total={20} grow mt='xl'/>
         </Container>
     );
 }

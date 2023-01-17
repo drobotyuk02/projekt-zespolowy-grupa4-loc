@@ -5,7 +5,7 @@ import ProductsList from "../components/products/ProductsList.jsx";
 
 const Store = () => {
     const {scrollIntoView, targetRef} = useScrollIntoView({
-        offset: 60,
+        offset: 65,
         easing: t => t === 1 ? 1 : 1 - Math.pow(2, -10 * t)
         // easing: (t) => (t < 0.5 ? 16 * Math.pow(t, 5) : 1 - Math.pow(-2 * t + 2, 5) / 2)
         //easing: t => Math.sqrt(1 - Math.pow(t - 1, 2))

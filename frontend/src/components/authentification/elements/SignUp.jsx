@@ -75,7 +75,7 @@ export function SignUp() {
         //     "repeatedPassword": ""
         // }
 
-        // axios.post('http://localhost:8082/auth/registration',
+        // axios.post('http://localhost:8080/auth/registration',
         //     {
         //         ...form.values,
         //         repeatedPassword: form.values.password

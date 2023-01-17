@@ -9,7 +9,7 @@ const useStyles = createStyles((theme) => ({
         marginTop: 120,
         //gray line between elements
         borderTop: `1px solid ${
-            theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]
+            theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]
         }`,
         bottom: 0
     },
@@ -59,7 +59,7 @@ const Footer = () => {
     items.push()
 
     return (
-        <div className={classes.footer} style={{'marginTop': '10px', 'zIndex':'-1', 'bottom': '0px'}}>
+        <div className={classes.footer} style={{'marginTop': '5px', 'zIndex':'-1', 'bottom': '0px'}}>
             <div style={{
                 'borderRadius': '15px',
                 'background': 'linear-gradient(120.08deg, #995AE7 0.53%, #AAFDE4 100%)'
@@ -77,7 +77,6 @@ const Footer = () => {
                                 <IconBrandGithub size={18} stroke={1.5}/>
                             </ActionIcon>
                         </a>
-
                     </Group>
                 </div>
                 <Center>
