@@ -29,7 +29,7 @@ public class HomeController {
 
     @GetMapping
     public String index() {
-        return "forward:/";
+        return "forward:/currentUserInfo";
     }
 
     @ResponseBody
