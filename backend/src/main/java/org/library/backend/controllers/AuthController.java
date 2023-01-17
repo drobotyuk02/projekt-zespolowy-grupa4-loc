@@ -36,7 +36,7 @@ import java.util.List;
 import static java.util.List.*;
 
 @Controller
-@CrossOrigin
+@CrossOrigin(origins = "https://pure-chamber-20689.herokuapp.com/")
 @RequestMapping("/auth")
 public class AuthController {
 
