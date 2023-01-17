@@ -87,7 +87,7 @@ export function SignUp() {
         //     }
         // ).then(r => console.log(r))
 
-        fetch('http://localhost:8082/auth/registration', {
+        fetch('http://localhost:8080/auth/registration', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

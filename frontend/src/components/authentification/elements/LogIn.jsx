@@ -55,7 +55,7 @@ export function LogIn() {
     const theme = useMantineTheme();
 
     function handleLogin(){
-        fetch('http://localhost:8082/auth/login', {
+        fetch('http://localhost:8080/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
